@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ContactList from './components/ContactList';
+import SearchForm from './components/SearchForm';
 
 function App() {
 
@@ -264,11 +265,17 @@ function App() {
     "avatar": "https:\/\/s3.amazonaws.com\/uifaces\/faces\/twitter\/gseguin\/128.jpg",
     "id": 2
   }])
+  const [searchString, setSearchString] = useState('')
+
+  function getContact() {
+    return contacts.filter(contact => contact.name.toLowerCase().includes(searchString.toLowerCase()))
+  }
 
   return (
     <div className="wrapper">
       Phone book
-      <ContactList contacts={contacts} />
+      <SearchForm onChange={setSearchString} />
+      <ContactList contacts={getContact()} />
     </div>
   );
 }
