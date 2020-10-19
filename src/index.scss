@@ -20,6 +20,7 @@ ul {
 .wrapper {
   max-width: 1000px;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 .contacts {
@@ -91,6 +92,7 @@ ul {
   width: 100%;
   padding: 20px 0 20px 20px;
   background-color: rgb(231, 231, 231);
+  box-sizing: border-box;
   border: 0px;
   border-radius: 20px;
   outline: none;

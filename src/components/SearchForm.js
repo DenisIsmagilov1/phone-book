@@ -1,11 +1,32 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-function SearchForm({ onChange }) {
+import { changeSearchString } from '../store/actions/contacts'
+
+function SearchForm({ searchString, onChange }) {
   return (
     <div>
-      <input onChange={(event) => onChange(event.target.value)} className="search-input" placeholder="Type name" />
+      <input
+        value={searchString}
+        onChange={(event) => onChange(event.target.value)}
+        className="search-input"
+        placeholder="Type name"
+      />
     </div>
   )
 }
 
-export default SearchForm
+const mapStateToProps = ({ searchString }) => {
+  return {
+    searchString
+  }
+}
+
+const mapActionsToProps = (dispatch) => {
+  return bindActionCreators({
+    onChange: changeSearchString
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(SearchForm)

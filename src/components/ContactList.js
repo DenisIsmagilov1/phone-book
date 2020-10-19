@@ -1,7 +1,29 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import ContactGroup from './ContactGroup'
 
-function ContactList({ contactGroups }) {
+function ContactList({ contacts, searchString }) {
+
+  function getContact() {
+    return contacts.filter(contact => contact.name.toLowerCase().includes(searchString.toLowerCase()))
+  }
+
+  function getContactGroups() {
+    const contacts = getContact();
+    const contactGroups = {}
+
+    for (let contact of contacts) {
+      let firstChar = contact.name[0].toUpperCase();
+      if (!Array.isArray(contactGroups[firstChar])) {
+        contactGroups[firstChar] = []
+      }
+      contactGroups[firstChar].push(contact)
+    }
+
+    return contactGroups
+  }
+
+  const contactGroups = getContactGroups()
 
   const contactGroupItems = []
 
@@ -12,10 +34,17 @@ function ContactList({ contactGroups }) {
   return (
     <div>
       <ul className="contacts">
-        {contactGroupItems.length != 0 ? contactGroupItems : 'Not found'}
+        {contactGroupItems.length !== 0 ? contactGroupItems : 'Not found'}
       </ul>
     </div>
   )
 }
 
-export default ContactList
+const mapStateToProps = ({ contacts, searchString }) => {
+  return {
+    contacts,
+    searchString
+  }
+}
+
+export default connect(mapStateToProps)(ContactList)
