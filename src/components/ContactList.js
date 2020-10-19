@@ -1,14 +1,18 @@
 import React from 'react'
-import ContactItem from './ContactItem'
+import ContactGroup from './ContactGroup'
 
-function ContactList({ contacts }) {
+function ContactList({ contactGroups }) {
 
-  const contactsItems = contacts.map(contact => <ContactItem contact={contact} key={contact.phone} />)
+  const contactGroupItems = []
+
+  for (let title in contactGroups) {
+    contactGroupItems.push(<ContactGroup contacts={contactGroups[title]} title={title} key={title} />)
+  }
 
   return (
     <div>
       <ul className="contacts">
-        {contactsItems.length !== 0 ? contactsItems : 'Not Found'}
+        {contactGroupItems.length != 0 ? contactGroupItems : 'Not found'}
       </ul>
     </div>
   )

@@ -26,6 +26,27 @@ ul {
 
   margin: 20px 0;
 
+  &__group {
+    position: relative;
+    margin: 0 0 30px;
+    border: 1px solid #000;
+    border-radius: 20px;
+
+    &:last-child {
+      margin: 0;
+    }
+
+    &__title {
+      position: absolute;
+      top: -15px;
+      left: 30px;
+      padding: 0 10px;
+      background-color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+
   &__item {
     display: flex;
     padding: 25px;
@@ -68,7 +89,7 @@ ul {
 
 .search-input {
   width: 100%;
-  padding: 20px;
+  padding: 20px 0 20px 20px;
   background-color: rgb(231, 231, 231);
   border: 0px;
   border-radius: 20px;

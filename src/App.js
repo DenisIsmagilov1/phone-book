@@ -271,11 +271,26 @@ function App() {
     return contacts.filter(contact => contact.name.toLowerCase().includes(searchString.toLowerCase()))
   }
 
+  function getContactGroups() {
+    const contacts = getContact();
+    const contactGroups = {}
+
+    for (let contact of contacts) {
+      let firstChar = contact.name[0].toUpperCase();
+      if (!Array.isArray(contactGroups[firstChar])) {
+        contactGroups[firstChar] = []
+      }
+      contactGroups[firstChar].push(contact)
+    }
+
+    return contactGroups
+  }
+
   return (
     <div className="wrapper">
       Phone book
       <SearchForm onChange={setSearchString} />
-      <ContactList contacts={getContact()} />
+      <ContactList contactGroups={getContactGroups()} />
     </div>
   );
 }
