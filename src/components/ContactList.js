@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import ContactGroup from './ContactGroup'
 
-function ContactList({ contacts, searchString }) {
+import ContactGroup from './ContactGroup'
+import { fetchContactsRequest } from '../store/actions/contacts'
+
+function ContactList({ contacts, searchString, fetchContactsRequest }) {
+
+  useEffect(() => {
+    fetchContactsRequest()
+  }, [])
 
   function getContact() {
     return contacts.filter(contact => contact.name.toLowerCase().includes(searchString.toLowerCase()))
@@ -47,4 +54,10 @@ const mapStateToProps = ({ contacts, searchString }) => {
   }
 }
 
-export default connect(mapStateToProps)(ContactList)
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    fetchContactsRequest
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList)

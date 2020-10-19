@@ -19,8 +19,18 @@ const updateContact = (contact) => {
   }
 }
 
+const fetchContactsRequest = () => (dispatch) => {
+  fetch('http://demo.sibers.com/users')
+    .then(res => res.json())
+    .then(res => dispatch({
+      type: 'REQUEST_CONTACTS_SUCCESS',
+      payload: res
+    }))
+}
+
 export {
   changeSearchString,
   setContactDetail,
-  updateContact
+  updateContact,
+  fetchContactsRequest
 }
