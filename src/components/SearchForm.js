@@ -10,7 +10,7 @@ function SearchForm({ searchString, onChange }) {
       <input
         value={searchString}
         onChange={(event) => onChange(event.target.value)}
-        className="search-input"
+        className="search-input input"
         placeholder="Type name"
       />
     </div>

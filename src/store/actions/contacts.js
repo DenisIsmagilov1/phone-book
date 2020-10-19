@@ -5,6 +5,22 @@ const changeSearchString = (string) => {
   }
 }
 
+const setContactDetail = (contact) => {
+  return {
+    type: 'SET_CONTACT_DETAIL',
+    payload: contact
+  }
+}
+
+const updateContact = (contact) => {
+  return {
+    type: 'UPDATE_CONTACT',
+    payload: contact
+  }
+}
+
 export {
-  changeSearchString
+  changeSearchString,
+  setContactDetail,
+  updateContact
 }

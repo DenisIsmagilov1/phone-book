@@ -260,7 +260,8 @@ const initialState = {
     "favorite": false,
     "avatar": "https:\/\/s3.amazonaws.com\/uifaces\/faces\/twitter\/gseguin\/128.jpg",
     "id": 2
-  }]
+  }],
+  contactDetail: null
 }
 
 function contactsReducer(state = initialState, action) {
@@ -269,6 +270,26 @@ function contactsReducer(state = initialState, action) {
       return {
         ...state,
         searchString: action.payload
+      }
+    };
+    case 'SET_CONTACT_DETAIL': {
+      return {
+        ...state,
+        contactDetail: action.payload
+      }
+    };
+    case 'UPDATE_CONTACT': {
+      const index = state.contacts.findIndex(contact => contact.id == action.payload.id);
+      return {
+        ...state,
+        contacts: [
+          ...state.contacts.slice(0, index),
+          {
+            ...state.contacts[index],
+            ...action.payload
+          },
+          ...state.contacts.slice(index + 1),
+        ]
       }
     }
     default:

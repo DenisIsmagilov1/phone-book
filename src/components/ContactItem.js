@@ -1,10 +1,14 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-function ContactItem({ contact }) {
+import { setContactDetail } from '../store/actions/contacts'
+
+function ContactItem({ contact, setContactDetail }) {
   const { name, phone } = contact;
 
   return (
-    <li className="contacts__item">
+    <li onClick={() => setContactDetail(contact)} className="contacts__item">
       <div className="contacts__avatar">
         {name[0]}
       </div>
@@ -16,4 +20,10 @@ function ContactItem({ contact }) {
   )
 }
 
-export default ContactItem
+const mapActionsToProps = (dispatch) => {
+  return bindActionCreators({
+    setContactDetail
+  }, dispatch)
+}
+
+export default connect(null, mapActionsToProps)(ContactItem)
