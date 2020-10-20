@@ -20,12 +20,24 @@ const updateContact = (contact) => {
 }
 
 const fetchContactsRequest = () => (dispatch) => {
-  fetch('http://demo.sibers.com/users')
-    .then(res => res.json())
-    .then(res => dispatch({
+
+  const contacts = localStorage.getItem('contacts')
+  if (contacts) {
+    dispatch({
       type: 'REQUEST_CONTACTS_SUCCESS',
-      payload: res
-    }))
+      payload: JSON.parse(contacts)
+    })
+  } else {
+    fetch('http://demo.sibers.com/users')
+      .then(res => res.json())
+      .then(res => {
+        localStorage.setItem('contacts', JSON.stringify(res))
+        dispatch({
+          type: 'REQUEST_CONTACTS_SUCCESS',
+          payload: res
+        })
+      })
+  }
 }
 
 export {

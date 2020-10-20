@@ -33,7 +33,7 @@ function ContactDetail({ contactDetail, setContactDetail, updateContact }) {
         <div className="contact-detail">
           <div className="contact-detail__header">
             <div className="contact-detail__avatar">
-              <img src={avatar}></img>
+              <img src={avatar} alt="avatar"></img>
             </div>
             <button onClick={() => setDisabled(!disabled)} className="contact-detail__update button">Change</button>
           </div>

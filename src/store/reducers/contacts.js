@@ -19,17 +19,21 @@ function contactsReducer(state = initialState, action) {
       }
     };
     case 'UPDATE_CONTACT': {
-      const index = state.contacts.findIndex(contact => contact.id == action.payload.id);
+      const index = state.contacts.findIndex(contact => contact.id === action.payload.id);
+      const newContacts = [
+        ...state.contacts.slice(0, index),
+        {
+          ...state.contacts[index],
+          ...action.payload
+        },
+        ...state.contacts.slice(index + 1),
+      ];
+
+      localStorage.setItem('contacts', JSON.stringify(newContacts))
+
       return {
         ...state,
-        contacts: [
-          ...state.contacts.slice(0, index),
-          {
-            ...state.contacts[index],
-            ...action.payload
-          },
-          ...state.contacts.slice(index + 1),
-        ]
+        contacts: newContacts
       }
     };
     case 'REQUEST_CONTACTS_SUCCESS': {
