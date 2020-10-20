@@ -12,7 +12,9 @@ function ContactList({ contacts, searchString, fetchContactsRequest }) {
   }, [])
 
   function getContact() {
-    return contacts.filter(contact => contact.name.toLowerCase().includes(searchString.toLowerCase()))
+    const contactsSort = contacts.sort(({ name: x1 }, { name: x2 }) => x1 > x2 ? 1 : -1)
+
+    return contactsSort.filter(contact => contact.name.toLowerCase().includes(searchString.toLowerCase()))
   }
 
   function getContactGroups() {

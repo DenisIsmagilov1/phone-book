@@ -71,10 +71,12 @@ ul {
   display: flex;
   padding: 25px;
   cursor: pointer;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
 }
 
 .contacts__item:hover {
-  border: 1px solid #ccc;
+  background-color: whitesmoke;
   border-radius: 20px;
 }
 

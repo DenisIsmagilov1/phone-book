@@ -71,9 +71,10 @@ ul {
     display: flex;
     padding: 25px;
     cursor: pointer;
+    box-sizing: content-box;
 
     &:hover {
-      border: 1px solid #ccc;
+      background-color: rgb(245, 245, 245);
       border-radius: 20px;
     }
   }
